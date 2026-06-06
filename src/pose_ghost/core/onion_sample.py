@@ -1,1 +1,8 @@
-"""Placeholder for onion_sample.py. Implement in Stage 03 — Core Logic."""
+from dataclasses import dataclass
+
+@dataclass
+class OnionSample:
+    frame: float
+    side: str  # "previous" or "next"
+    index: int  # 1 = nearest, 2 = farther
+    opacity: float
