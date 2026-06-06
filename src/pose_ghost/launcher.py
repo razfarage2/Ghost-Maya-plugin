@@ -28,8 +28,9 @@ class MayaUiCommandsAdapter(UiCommandsProtocol):
     def scan_target_root(self, path: str):
         if not cmds.objExists(path):
             return
-        
-        targets = TargetScanner.scan_target_root(path)
+            
+        from pose_ghost.maya_adapters.target_scan_cache import TargetScanCache
+        targets = TargetScanCache.get_or_scan(path, force=True)
         
         rows = []
         for t in targets:
@@ -86,6 +87,10 @@ class MayaUiCommandsAdapter(UiCommandsProtocol):
     def set_ghost_source_mode(self, mode: str, proxy_root=None):
         pass
         
+    def set_heavy_rig_mode(self, enabled: bool):
+        from pose_ghost.runtime.event_router import HeavyRigModeEvent
+        self.controller.handle_event(HeavyRigModeEvent(enabled))
+
     def enable(self):
         from pose_ghost.runtime.event_router import EnableStateChangedEvent
         self.controller.handle_event(EnableStateChangedEvent(True))
@@ -100,6 +105,7 @@ class MayaUiCommandsAdapter(UiCommandsProtocol):
     def force_rebuild(self):
         from pose_ghost.runtime.event_router import ForceRebuildEvent
         self.controller.handle_event(ForceRebuildEvent())
+        get_app().process_pending_updates()
 
     def save_profile(self):
         SceneProfileStore.save_profile({"target_root": "saved_from_ui"})
@@ -136,19 +142,38 @@ class PoseGhostApp:
         import maya.api.OpenMaya as om
         
         def _on_idle(clientData=None):
-            req = self.root.queue.drain_latest()
-            if req:
-                with self.root.controller.internal_time_change():
-                    if req["action"] == "rebuild":
-                        state = req["state"]
-                        targets = getattr(self.ui_adapter, 'current_targets', [])
-                        active_targets = self.bypass_store.filter_targets(targets)
-                        MeshSnapshotRenderer.render(state.sample_plan, active_targets)
-                    elif req["action"] == "clear":
-                        MeshSnapshotRenderer.cleanup()
+            self.root.controller.check_debounce()
+            self.process_pending_updates()
 
         self._idle_cb = om.MEventMessage.addEventCallback("idle", _on_idle)
         self.root.registry.register("idle_drain", lambda cb: om.MMessage.removeCallback(self._idle_cb))
+
+    def process_pending_updates(self):
+        req = self.root.queue.drain_latest()
+        if req:
+            with self.root.controller.internal_time_change():
+                reqs = req.get("requests", [req]) if req.get("action") == "multi" else [req]
+                for r in reqs:
+                    if r["action"] == "rebuild":
+                        state = r["state"]
+                        targets = getattr(self.ui_adapter, 'current_targets', [])
+                        active_targets = self.bypass_store.filter_targets(targets)
+                        MeshSnapshotRenderer.render(state.sample_plan, active_targets)
+                    elif r["action"] == "appearance":
+                        state = r["state"]
+                        targets = getattr(self.ui_adapter, 'current_targets', [])
+                        active_targets = self.bypass_store.filter_targets(targets)
+                        MeshSnapshotRenderer.apply_appearance_only(state.sample_plan, active_targets)
+                    elif r["action"] == "clear":
+                        MeshSnapshotRenderer.cleanup()
+                    elif r["action"] == "status":
+                        if self.panel:
+                            self.panel.set_status_text(r.get("text", "Status: Live"))
+                    elif r["action"] == "invalidate_cache":
+                        from pose_ghost.maya_adapters.ghost_node_pool import GhostNodePool
+                        targets = getattr(self.ui_adapter, 'current_targets', [])
+                        for t in targets:
+                            GhostNodePool.invalidate_target(t)
 
     def show(self):
         self.initialize()

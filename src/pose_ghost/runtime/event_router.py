@@ -6,7 +6,7 @@ class TimeChangeEvent:
 
 @dataclass
 class KeyEditEvent:
-    pass
+    timestamp: float = 0.0
 
 @dataclass
 class PlaybackStartedEvent:
@@ -26,6 +26,10 @@ class ForceRebuildEvent:
 
 @dataclass
 class EnableStateChangedEvent:
+    enabled: bool
+
+@dataclass
+class HeavyRigModeEvent:
     enabled: bool
 
 class EventRouter:

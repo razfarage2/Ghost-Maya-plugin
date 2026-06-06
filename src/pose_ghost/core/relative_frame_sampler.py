@@ -12,7 +12,7 @@ class RelativeFrameSampler:
         # Previous Samples
         if settings.display_mode in (DisplayMode.BOTH, DisplayMode.PREVIOUS):
             for i in range(1, settings.previous_count + 1):
-                frame = current_frame - (i * settings.frame_step)
+                frame = round(current_frame - (i * settings.frame_step), 3)
                 
                 if settings.clamp_to_playback_range:
                     if frame < settings.playback_min_frame:
@@ -32,7 +32,7 @@ class RelativeFrameSampler:
         # Next Samples
         if settings.display_mode in (DisplayMode.BOTH, DisplayMode.NEXT):
             for i in range(1, settings.next_count + 1):
-                frame = current_frame + (i * settings.frame_step)
+                frame = round(current_frame + (i * settings.frame_step), 3)
                 
                 if settings.clamp_to_playback_range:
                     if frame > settings.playback_max_frame:

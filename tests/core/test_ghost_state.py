@@ -28,8 +28,8 @@ class TestGhostState(unittest.TestCase):
         self.assertTrue(self.state.requires_rebuild(self.plan, new_settings, "target_v1"))
 
     def test_changed_opacity(self):
-        new_settings = OnionSettings(base_opacity=0.8)
-        self.assertTrue(self.state.requires_rebuild(self.plan, new_settings, "target_v1"))
+        new_settings = OnionSettings(base_opacity=0.5)
+        self.assertFalse(self.state.requires_rebuild(self.plan, new_settings, "target_v1"))
 
 if __name__ == '__main__':
     unittest.main()

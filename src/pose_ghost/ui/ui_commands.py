@@ -20,6 +20,7 @@ class UiCommandsProtocol(Protocol):
     def clear_ghosts(self): ...
     def force_rebuild(self): ...
     def save_profile(self): ...
+    def set_heavy_rig_mode(self, enabled: bool): ...
 
 class FakeUiCommands:
     """A fake implementation for testing UI components without Maya."""
@@ -72,3 +73,6 @@ class FakeUiCommands:
         
     def save_profile(self):
         self._record("save_profile")
+        
+    def set_heavy_rig_mode(self, enabled: bool):
+        self._record("set_heavy_rig_mode", enabled)

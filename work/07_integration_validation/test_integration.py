@@ -102,8 +102,10 @@ def run_tests():
         root.controller.update_settings(OnionSettings(previous_count=5))
         drain_and_render()
         
-        # Ghost at frame 10 should be at tx=15 now.
-        ghost10 = [g for g in cmds.listRelatives("PoseGhostPreviousGrp", children=True) if "Prev_5" in g][0]
+        # Now we're at frame 15, prev is 10, 5. Next is 20, 25.
+        # Find frame 10 ghost (it's the first previous)
+        # Ghost name format: Ghost_targetName_frame
+        ghost10 = [g for g in cmds.listRelatives("PoseGhostPreviousGrp", children=True) if "10" in g][0]
         tx10 = cmds.getAttr(f"{ghost10}.tx")
         
         log("Key edit dirty update", "confirmed" if abs(tx10 - 15.0) < 0.001 else "fail", f"Ghost10 tx={tx10}")
@@ -153,7 +155,7 @@ def run_tests():
         
         # With prev=5, frames 7,8,9,10,11. Clamp should block 7,8,9.
         # So only 10, 11 should be generated.
-        prev_ghosts_clamped = cmds.listRelatives("PoseGhostPreviousGrp", children=True) or []
+        prev_ghosts_clamped = [g for g in (cmds.listRelatives("PoseGhostPreviousGrp", children=True) or []) if cmds.getAttr(f"{g}.visibility")]
         log("Range clamp", "confirmed" if len(prev_ghosts_clamped) == 2 else "fail", f"Expected 2, got {len(prev_ghosts_clamped)}")
 
         # ----------------------------------------------------
@@ -177,7 +179,7 @@ def run_tests():
         root.controller.update_target_signature("cube_bypassed")
         drain_and_render()
         
-        prev_ghosts_bypassed = cmds.listRelatives("PoseGhostPreviousGrp", children=True) or []
+        prev_ghosts_bypassed = [g for g in (cmds.listRelatives("PoseGhostPreviousGrp", children=True) or []) if cmds.getAttr(f"{g}.visibility")]
         log("Object bypass", "confirmed" if len(prev_ghosts_bypassed) == 0 else "fail", "Bypassed cube should yield no ghosts.")
         
         bypass_store.unmark_bypassed(cube)

@@ -19,6 +19,18 @@ class PoseGhostPanel:
         self.widget = QtWidgets.QWidget()
         layout = QtWidgets.QVBoxLayout(self.widget)
         
+        # --- Status ---
+        status_layout = QtWidgets.QHBoxLayout()
+        self.status_label = QtWidgets.QLabel("Status: Live")
+        self.status_label.setStyleSheet("font-weight: bold;")
+        self.heavy_rig_check = QtWidgets.QCheckBox("Heavy Rig Mode")
+        self.heavy_rig_check.setToolTip("Disable auto-rebuild for heavy rigs")
+        self.heavy_rig_check.toggled.connect(self._on_heavy_rig_mode_toggled)
+        status_layout.addWidget(self.status_label)
+        status_layout.addStretch()
+        status_layout.addWidget(self.heavy_rig_check)
+        layout.addLayout(status_layout)
+        
         # --- Targets ---
         target_layout = QtWidgets.QHBoxLayout()
         self.target_root_field = QtWidgets.QLineEdit()
@@ -216,7 +228,7 @@ class PoseGhostPanel:
         
         settings = OnionSettings(
             base_opacity=opacity,
-            opacity_falloff=falloff,
+            opacity_falloff_enabled=falloff,
             fade_strength=fade
         )
         self.commands.set_appearance_settings(settings)
@@ -233,3 +245,10 @@ class PoseGhostPanel:
         else:
             self.btn_enable.setText("Enable")
             self.commands.disable()
+
+    def _on_heavy_rig_mode_toggled(self, checked):
+        self.commands.set_heavy_rig_mode(checked)
+
+    def set_status_text(self, text: str):
+        if self.widget and getattr(self, 'status_label', None):
+            self.status_label.setText(text)

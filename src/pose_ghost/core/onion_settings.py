@@ -10,7 +10,7 @@ class OnionSettings:
     playback_min_frame: float = 0.0
     playback_max_frame: float = 100.0
     display_mode: DisplayMode = DisplayMode.BOTH
-    base_opacity: float = 0.10
+    base_opacity: float = 0.35
     opacity_falloff_enabled: bool = True
     fade_strength: float = 0.35
     sampling_mode: str = "relative_frames"

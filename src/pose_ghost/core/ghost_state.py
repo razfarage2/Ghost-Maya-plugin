@@ -19,6 +19,9 @@ class GhostState:
         if self.settings.display_mode != new_settings.display_mode:
             return True
             
+        return False
+        
+    def requires_appearance_update(self, new_plan: SamplePlan, new_settings: OnionSettings) -> bool:
         if self.settings.base_opacity != new_settings.base_opacity:
             return True
             
