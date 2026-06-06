@@ -12,7 +12,8 @@ class DisplayLayerManager:
     def setup_groups(cls):
         if not cmds.objExists(cls.ROOT_GRP):
             cmds.group(empty=True, name=cls.ROOT_GRP)
-            # Make root non-renderable? We can just leave it as transform.
+            if cmds.objExists(f"{cls.ROOT_GRP}.hiddenInOutliner"):
+                cmds.setAttr(f"{cls.ROOT_GRP}.hiddenInOutliner", 1)
             
         if not cmds.objExists(cls.PREV_GRP):
             cmds.group(empty=True, name=cls.PREV_GRP, parent=cls.ROOT_GRP)
