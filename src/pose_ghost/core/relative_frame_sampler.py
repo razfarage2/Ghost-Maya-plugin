@@ -1,0 +1,1 @@
+"""Placeholder for relative_frame_sampler.py. Implement in Stage 03 — Core Logic."""

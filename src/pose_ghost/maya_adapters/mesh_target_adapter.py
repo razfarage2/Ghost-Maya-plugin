@@ -1,0 +1,1 @@
+"""Placeholder for mesh_target_adapter.py. Implement in Maya API probe / renderer stages."""

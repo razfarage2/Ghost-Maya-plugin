@@ -1,0 +1,1 @@
+"""Placeholder for test_display_mode.py. Implement in Stage 03."""

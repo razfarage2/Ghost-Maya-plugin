@@ -1,0 +1,1 @@
+"""Placeholder for object_list_model.py. Implement in Stage 06 — UI Panel."""

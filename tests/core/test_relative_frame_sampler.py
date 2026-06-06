@@ -1,0 +1,1 @@
+"""Placeholder for test_relative_frame_sampler.py. Implement in Stage 03."""

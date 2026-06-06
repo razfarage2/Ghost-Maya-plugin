@@ -1,0 +1,8 @@
+[project]
+name = "pose-ghost"
+version = "0.0.0"
+description = "Maya 3D onion-skinning plugin scaffold"
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+testpaths = ["tests/core"]

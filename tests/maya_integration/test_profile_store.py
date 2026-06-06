@@ -1,0 +1,1 @@
+"""Placeholder for test_profile_store.py. Implement during Maya integration stages."""

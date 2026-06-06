@@ -1,0 +1,1 @@
+"""Placeholder for material_manager.py. Implement in Maya API probe / renderer stages."""

@@ -1,0 +1,1 @@
+"""Placeholder for target_scanner.py. Implement in Maya API probe / renderer stages."""

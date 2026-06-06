@@ -1,0 +1,1 @@
+"""Placeholder for onion_sample.py. Implement in Stage 03 — Core Logic."""

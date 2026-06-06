@@ -1,0 +1,1 @@
+"""Placeholder for keyframe_query.py. Implement in Maya API probe / renderer stages."""

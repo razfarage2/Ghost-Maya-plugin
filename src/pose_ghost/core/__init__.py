@@ -1,0 +1,1 @@
+"""Pure Pose Ghost core logic. No Maya imports allowed."""

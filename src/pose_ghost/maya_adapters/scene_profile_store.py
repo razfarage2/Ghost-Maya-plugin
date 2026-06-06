@@ -1,0 +1,1 @@
+"""Placeholder for scene_profile_store.py. Implement in Maya API probe / renderer stages."""

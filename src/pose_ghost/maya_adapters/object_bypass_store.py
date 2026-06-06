@@ -1,0 +1,1 @@
+"""Placeholder for object_bypass_store.py. Implement in Maya API probe / renderer stages."""

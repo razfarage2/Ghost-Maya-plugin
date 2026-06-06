@@ -1,0 +1,1 @@
+"""Placeholder for sample_plan.py. Implement in Stage 03 — Core Logic."""

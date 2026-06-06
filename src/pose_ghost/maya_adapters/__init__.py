@@ -1,0 +1,1 @@
+"""Maya-specific adapters for Pose Ghost."""

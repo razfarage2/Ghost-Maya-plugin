@@ -1,0 +1,1 @@
+"""Placeholder for composition_root.py. Implement in Stage 04 — Event Runtime."""

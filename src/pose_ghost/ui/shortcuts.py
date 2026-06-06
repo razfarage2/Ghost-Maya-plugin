@@ -1,0 +1,1 @@
+"""Placeholder for shortcuts.py. Implement in Stage 06 — UI Panel."""

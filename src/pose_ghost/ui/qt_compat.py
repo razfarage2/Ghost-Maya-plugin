@@ -1,0 +1,1 @@
+"""Placeholder for qt_compat.py. Implement in Stage 06 — UI Panel."""

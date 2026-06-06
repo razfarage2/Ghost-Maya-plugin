@@ -1,0 +1,1 @@
+"""Placeholder for test_sample_plan.py. Implement in Stage 03."""

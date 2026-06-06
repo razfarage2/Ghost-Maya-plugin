@@ -1,0 +1,1 @@
+"""Placeholder for test_ghost_state.py. Implement in Stage 03."""

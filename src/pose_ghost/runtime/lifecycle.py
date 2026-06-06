@@ -1,0 +1,1 @@
+"""Placeholder for lifecycle.py. Implement in Stage 04 — Event Runtime."""

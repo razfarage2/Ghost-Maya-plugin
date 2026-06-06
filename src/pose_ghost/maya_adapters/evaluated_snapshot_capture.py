@@ -1,0 +1,1 @@
+"""Placeholder for evaluated_snapshot_capture.py. Implement in Maya API probe / renderer stages."""

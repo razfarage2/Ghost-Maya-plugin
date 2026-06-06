@@ -1,0 +1,1 @@
+"""Placeholder for display_mode.py. Implement in Stage 03 — Core Logic."""

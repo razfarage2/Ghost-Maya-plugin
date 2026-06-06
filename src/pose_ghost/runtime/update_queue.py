@@ -1,0 +1,1 @@
+"""Placeholder for update_queue.py. Implement in Stage 04 — Event Runtime."""

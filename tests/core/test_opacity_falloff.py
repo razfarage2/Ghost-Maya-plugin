@@ -1,0 +1,1 @@
+"""Placeholder for test_opacity_falloff.py. Implement in Stage 03."""

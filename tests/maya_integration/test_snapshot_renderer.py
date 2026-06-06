@@ -1,0 +1,1 @@
+"""Placeholder for test_snapshot_renderer.py. Implement during Maya integration stages."""

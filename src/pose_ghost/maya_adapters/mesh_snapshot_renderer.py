@@ -1,0 +1,1 @@
+"""Placeholder for mesh_snapshot_renderer.py. Implement in Maya API probe / renderer stages."""

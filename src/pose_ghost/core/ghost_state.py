@@ -1,0 +1,1 @@
+"""Placeholder for ghost_state.py. Implement in Stage 03 — Core Logic."""

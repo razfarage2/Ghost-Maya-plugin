@@ -1,0 +1,1 @@
+"""Placeholder for callback_registry.py. Implement in Stage 04 — Event Runtime."""

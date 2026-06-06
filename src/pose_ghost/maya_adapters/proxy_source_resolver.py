@@ -1,0 +1,1 @@
+"""Placeholder for proxy_source_resolver.py. Implement in Maya API probe / renderer stages."""

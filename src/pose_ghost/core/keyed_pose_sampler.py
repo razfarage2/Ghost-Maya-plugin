@@ -1,0 +1,1 @@
+"""Placeholder for keyed_pose_sampler.py. Implement in Stage 03 — Core Logic."""

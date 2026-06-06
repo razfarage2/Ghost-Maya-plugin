@@ -1,0 +1,1 @@
+"""Pose Ghost Maya 3D onion-skinning package."""

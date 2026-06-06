@@ -1,0 +1,1 @@
+"""Placeholder for opacity_falloff.py. Implement in Stage 03 — Core Logic."""

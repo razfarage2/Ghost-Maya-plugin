@@ -1,0 +1,1 @@
+"""Placeholder for pose_ghost_panel.py. Implement in Stage 06 — UI Panel."""

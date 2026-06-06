@@ -1,0 +1,1 @@
+"""Placeholder for event_router.py. Implement in Stage 04 — Event Runtime."""
